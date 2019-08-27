@@ -1,7 +1,7 @@
 <?php
-include 'clases/persona.php';
-include 'clases/alumno.php';
-include 'funciones.php';
+include './clases/persona.php';
+include './clases/alumno.php';
+include './funciones.php';
 
     echo "Ejercicio 1";
     $nombre = "Gabriel";
