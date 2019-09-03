@@ -12,7 +12,7 @@
 
         public function saludar()
         {
-             echo "Hola ".$this->nombre."\n";
+             echo 'Hola '.$this->nombre;
         }
     }
 ?>
