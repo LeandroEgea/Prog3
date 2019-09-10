@@ -10,7 +10,7 @@
         
         function guardar($object){
             $archivo = fopen($this->archivo, "a");
-            fwrite($archivo, PHP_EOL.$object->param1.' - '.$persona->param2.' - '.$persona->id);
+            fwrite($archivo, PHP_EOL.$object->param1.' - '.$object->param2.' - '.$object->id);
             fclose($archivo);
         }
 
