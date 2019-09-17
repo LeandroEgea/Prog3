@@ -2,6 +2,8 @@
     class GenericDao
     {
         //TODO meter try catch finally
+        //TODO meter un rta en los metodos
+        //TODO sacar todo lo que esta igual a metodos
         public $archivo;
 
         public function __construct($archivo)
@@ -31,17 +33,30 @@
             }
         }
 
-        function borrar($idName, $idValue){
+        function borrar($idKey, $idValue){
             $json = $this->listar();
             $archivo = fopen($this->archivo, "w");
             $objects = json_decode($json);
             foreach($objects as $key => $object){
-                if($object->$idName == $idValue){
+                if($object->$idKey == $idValue){
                     unset($objects[$key]);
                 }
             }
             fwrite($archivo, json_encode($objects));
             fclose($archivo);
         }
+
+        function modificar($idKey, $idValue, $changeKey, $changeValue){
+            $json = $this->listar();
+            $archivo = fopen($this->archivo, "w");
+            $objects = json_decode($json);
+            foreach($objects as $key => $object){ //TODO sacar key
+                if($object->$idKey == $idValue){
+                    $object->$changeKey = $changeValue;
+                }
+            }
+            fwrite($archivo, json_encode($objects));
+            fclose($archivo);
+        }        
     }
 ?>

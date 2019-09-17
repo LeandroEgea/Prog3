@@ -1,5 +1,6 @@
 <?php
     //TODO validar que sea una imagen(image/) que no supere los 2 mb
+    //TODO pasar todas las $_post a minuscula ("imagen") 
 
     /*$tmpName = $_FILES["imagen"]["tmp_name"];
     $extension = pathinfo($_FILES["imagen"]["name"], PATHINFO_EXTENSION);
@@ -13,16 +14,32 @@
 
     switch($request){
         case "POST" : 
-            if(isset($_POST["Nombre"]) && isset($_POST["Apellido"]) && isset($_POST["Legajo"]) 
-                && isset($_FILES["Imagen"])) {
-                $tmpName = $_FILES["Imagen"]["tmp_name"];
-                $extension = pathinfo($_FILES["Imagen"]["name"], PATHINFO_EXTENSION);
-                $filename = "./imagenes/".$_POST["Legajo"].".".$extension;
+            if(isset($_POST["case"]) && $_POST["case"] == "alta" && isset($_POST["nombre"]) 
+                && isset($_POST["apellido"]) && isset($_POST["legajo"]) && isset($_FILES["imagen"])) {
+                $tmpName = $_FILES["imagen"]["tmp_name"];
+                $extension = pathinfo($_FILES["imagen"]["name"], PATHINFO_EXTENSION);
+                $filename = "./imagenes/".$_POST["legajo"].".".$extension;
                 $rta = move_uploaded_file($tmpName, $filename);
                 if($rta == true) {
-                    $alumno = new Alumno($_POST["Nombre"], $_POST["Apellido"], $_POST["Legajo"], $filename);
+                    $alumno = new Alumno($_POST["nombre"], $_POST["apellido"], $_POST["legajo"], $filename);
                     $dao->guardar($alumno);
                     echo 'Saved';
+                }
+                else {
+                    echo 'Something went wrong';
+                }  
+            }
+            //TODO modificacion para nombre y apellido
+            else if (isset($_POST["case"]) && $_POST["case"] == "modificacion" && isset($_POST["legajo"]) 
+                && isset($_FILES["imagen"])) {
+                //TODO backupear
+                $tmpName = $_FILES["imagen"]["tmp_name"];
+                $extension = pathinfo($_FILES["imagen"]["name"], PATHINFO_EXTENSION);
+                $filename = "./imagenes/".$_POST["legajo"].".".$extension;
+                $rta = move_uploaded_file($tmpName, $filename);
+                if($rta == true) {
+                    $dao->modificar("legajo", $_POST["legajo"],"imagen", $filename);
+                    echo 'Modified';
                 }
                 else {
                     echo 'Something went wrong';
@@ -35,8 +52,9 @@
             break;
 
         case "DELETE" : 
-            if(isset($_GET["Legajo"])){
-                $dao->borrar("legajo", $_GET["Legajo"]);
+            //TODO borrar imagen
+            if(isset($_GET["legajo"])){
+                $dao->borrar("legajo", $_GET["legajo"]);
             }
             break;
     }
