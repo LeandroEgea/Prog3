@@ -16,6 +16,7 @@ class GenericDao
                 return $object;
             }
         }
+        return null;
     }
 
     public function listar()
@@ -48,15 +49,18 @@ class GenericDao
     public function borrar($idKey, $idValue): bool
     {
         try {
+            $retorno = false;
             $objects = json_decode($this->listar());
             $archivo = fopen($this->archivo, "w");
             foreach ($objects as $key => $object) {
                 if ($object->$idKey == $idValue) {
                     unset($objects[$key]);
+                    $retorno = true;
                     break;
                 }
             }
             fwrite($archivo, json_encode($objects));
+            return $retorno;
         } catch (Exception $e) {
             throw new Exception("No se pudo borrar", 0, $e);
         } finally {
@@ -67,15 +71,18 @@ class GenericDao
     public function modificar($idKey, $idValue, $changeKey, $changeValue): bool
     {
         try {
+            $retorno = false;
             $objects = json_decode($this->listar());
             $archivo = fopen($this->archivo, "w");
             foreach ($objects as $object) {
                 if ($object->$idKey == $idValue) {
                     $object->$changeKey = $changeValue;
+                    $retorno = true;
                     break;
                 }
             }
             fwrite($archivo, json_encode($objects));
+            return $retorno;
         } catch (Exception $e) {
             throw new Exception("No se pudo modificar", 0, $e);
         } finally {

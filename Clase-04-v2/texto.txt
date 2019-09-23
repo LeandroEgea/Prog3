@@ -1,1 +1,1 @@
-[{"nombre":"ddd","apellido":"hhhgg","legajo":"1234","imagen":".\/imagenes\/1234.png"}]
+[{"nombre":"ey","apellido":"hhhgg","legajo":"1234","imagen":".\/imagenes\/1234.png"}]
