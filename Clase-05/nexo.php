@@ -38,6 +38,12 @@ try {
                             echo "Hubo un error en los datos enviados";
                         }
                         break;
+                    case "modificarAlumno":
+                        if (isset($_POST["email"])){
+                            $alumnoController->modificarAlumno($_POST["email"], $_POST, $_FILES);
+                        } else {
+                            echo "Hubo un error en los datos enviados";
+                        }
                 }
             } else {
                 echo 'Indique el case correctamente';

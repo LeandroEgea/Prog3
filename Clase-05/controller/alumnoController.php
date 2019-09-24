@@ -33,6 +33,54 @@ class AlumnoController
     function consultarAlumno($apellido) {
         return $this->alumnosDao->getByAttributeCaseInsensitive("apellido", $apellido);
     }
+    
+    function modificarAlumno($email, $POST, $FILES)
+    {
+        //IMAGEN
+        // !is_null($dao->obtenerPorId("email", $_POST["email"]))
+        if (isset($FILES["foto"]) && isImage($FILES["foto"]) && tamanoValidoEnMb(($FILES["foto"]), 2)) {
+            //Backup Imagen
+                $hoy = date("d-m-Y_h:m");
+                $rutaAntigua = ($this->alumnosDao->obtenerPorId("email", $POST["email"]))->foto;
+                $array = explode(".", $rutaAntigua);//ver que es esto
+                var_dump($array);
+                $rutaNueva = "./imagenes/backUpFotos/" . end($array);
+                rename($rutaAntigua, $rutaNueva);
+                //Modificacion
+                $tmpName = $_FILES["imagen"]["tmp_name"];
+                $extension = pathinfo($_FILES["imagen"]["name"], PATHINFO_EXTENSION);
+                $filename = "./imagenes/" . $_POST["legajo"] . "." . $extension;
+                $rta = move_uploaded_file($tmpName, $filename);
+                if ($rta === true) {
+                    $rta = $dao->modificar("legajo", $_POST["legajo"], "imagen", $filename);
+                    if ($rta === true) {
+                        echo 'Imagen modificada';
+                    } else {
+                        echo 'Hubo un error al modificar la imagen';
+                    }
+                } else {
+                    echo 'Hubo un error con la imagen';
+                }
+            }
+            //NOMBRE
+            if (isset($_POST["nombre"])) {
+                $rta = $dao->modificar("legajo", $_POST["legajo"], "nombre", $_POST["nombre"]);
+                if ($rta === true) {
+                    echo PHP_EOL . 'Nombre modificado';
+                } else {
+                    echo PHP_EOL . 'Hubo un error al modificar el nombre';
+                }
+            }
+            //APELLIDO
+            if (isset($_POST["apellido"])) {
+                $rta = $dao->modificar("legajo", $_POST["legajo"], "apellido", $_POST["apellido"]);
+                if ($rta === true) {
+                    echo PHP_EOL . 'Apellido modificado';
+                } else {
+                    echo PHP_EOL . 'Hubo un error al modificar el apellido';
+                }
+            }
+    }
 
     function isImage($imagen): bool
     {
