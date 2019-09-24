@@ -4,6 +4,7 @@ class Alumno
     public $nombre;
     public $apellido;
     public $legajo;
+    public $imagen;
 
     public function __construct($nombre, $apellido, $legajo, $imagen)
     {
