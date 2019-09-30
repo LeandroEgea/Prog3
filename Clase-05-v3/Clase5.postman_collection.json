@@ -1,0 +1,379 @@
+{
+	"info": {
+		"_postman_id": "6ee7cb46-9288-41e7-ae85-fe7514a4adea",
+		"name": "Clase5",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Clase05",
+			"item": [
+				{
+					"name": "Cargar Alumno",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nombre",
+									"value": "Juan",
+									"type": "text"
+								},
+								{
+									"key": "apellido",
+									"value": "Perez",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "jperez@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "foto",
+									"type": "file",
+									"src": "/C:/Users/leandroe/Pictures/866580.png"
+								},
+								{
+									"key": "case",
+									"value": "cargarAlumno",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8050/Clase 5/nexo.php",
+							"host": [
+								"localhost"
+							],
+							"port": "8050",
+							"path": [
+								"Clase 5",
+								"nexo.php"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "apellido",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "foto",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Alumno",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "localhost:8050/Clase 5/nexo.php?case=consultarAlumno&apellido=perEz",
+							"host": [
+								"localhost"
+							],
+							"port": "8050",
+							"path": [
+								"Clase 5",
+								"nexo.php"
+							],
+							"query": [
+								{
+									"key": "case",
+									"value": "consultarAlumno"
+								},
+								{
+									"key": "apellido",
+									"value": "perEz"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cargar Materia",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nombre",
+									"value": "Estadistica",
+									"type": "text"
+								},
+								{
+									"key": "codigo",
+									"value": "A1",
+									"type": "text"
+								},
+								{
+									"key": "cupo",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "aula",
+									"value": "300",
+									"type": "text"
+								},
+								{
+									"key": "case",
+									"value": "cargarMateria",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8050/Clase 5/nexo.php",
+							"host": [
+								"localhost"
+							],
+							"port": "8050",
+							"path": [
+								"Clase 5",
+								"nexo.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inscribir Alumno",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "localhost:8050/Clase 5/nexo.php?case=inscribirAlumno&nombreMateria=Estadistic&codigoMateria=A1&nombreAlumno=Joan&apellidoAlumno=Perez&emailAlumno=jperez@gmail.com",
+							"host": [
+								"localhost"
+							],
+							"port": "8050",
+							"path": [
+								"Clase 5",
+								"nexo.php"
+							],
+							"query": [
+								{
+									"key": "case",
+									"value": "inscribirAlumno"
+								},
+								{
+									"key": "nombreMateria",
+									"value": "Estadistic"
+								},
+								{
+									"key": "codigoMateria",
+									"value": "A1"
+								},
+								{
+									"key": "nombreAlumno",
+									"value": "Joan"
+								},
+								{
+									"key": "apellidoAlumno",
+									"value": "Perez"
+								},
+								{
+									"key": "emailAlumno",
+									"value": "jperez@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obt. inscripciones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8050/Clase 5/nexo.php?case=inscripciones",
+							"host": [
+								"localhost"
+							],
+							"port": "8050",
+							"path": [
+								"Clase 5",
+								"nexo.php"
+							],
+							"query": [
+								{
+									"key": "case",
+									"value": "inscripciones"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obt. inscrip. filtradas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8050/Clase 5/nexo.php?case=inscripciones&apellidoAlumno=Perez",
+							"host": [
+								"localhost"
+							],
+							"port": "8050",
+							"path": [
+								"Clase 5",
+								"nexo.php"
+							],
+							"query": [
+								{
+									"key": "case",
+									"value": "inscripciones"
+								},
+								{
+									"key": "codigoMateria",
+									"value": "A1",
+									"disabled": true
+								},
+								{
+									"key": "apellidoAlumno",
+									"value": "Perez"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar Alumno",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "jperez@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "case",
+									"value": "modificarAlumno",
+									"type": "text"
+								},
+								{
+									"key": "foto",
+									"type": "file",
+									"src": "/C:/Users/leandroe/Pictures/866580.png"
+								},
+								{
+									"key": "nombre",
+									"value": "Juan",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "apellido",
+									"value": "Perez",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8050/Clase 5/nexo.php",
+							"host": [
+								"localhost"
+							],
+							"port": "8050",
+							"path": [
+								"Clase 5",
+								"nexo.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alumnos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8050/Clase 5/nexo.php?case=mostrarAlumnos",
+							"host": [
+								"localhost"
+							],
+							"port": "8050",
+							"path": [
+								"Clase 5",
+								"nexo.php"
+							],
+							"query": [
+								{
+									"key": "case",
+									"value": "mostrarAlumnos"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

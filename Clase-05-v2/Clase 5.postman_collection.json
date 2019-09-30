@@ -1,0 +1,263 @@
+{
+	"info": {
+		"_postman_id": "a82b36d2-2757-4730-bc22-607b123783d4",
+		"name": "Clase 5",
+		"description": "Practica pre parcial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Obt. inscrip. filtradas por materia",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/Clase 5/nexo.php?case=inscripcionesFiltrada&nombreMateria=Lab3",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"Clase 5",
+						"nexo.php"
+					],
+					"query": [
+						{
+							"key": "case",
+							"value": "inscripcionesFiltrada"
+						},
+						{
+							"key": "nombreMateria",
+							"value": "Lab3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obt. inscrip. filtradas por apellido",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/Clase 5/nexo.php?case=inscripcionesFiltrada&apellidoAlumno=DESARio",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"Clase 5",
+						"nexo.php"
+					],
+					"query": [
+						{
+							"key": "case",
+							"value": "inscripcionesFiltrada"
+						},
+						{
+							"key": "apellidoAlumno",
+							"value": "DESARio"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cargar Alumno",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Juan",
+							"type": "text"
+						},
+						{
+							"key": "apellido",
+							"value": "Perez",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "jperez@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "foto",
+							"type": "file",
+							"src": "/C:/Users/Public/Pictures/Sample Pictures/Hydrangeas.jpg"
+						},
+						{
+							"key": "case",
+							"value": "cargarAlumno",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/Clase 5/nexo.php",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"Clase 5",
+						"nexo.php"
+					],
+					"query": [
+						{
+							"key": "nombre",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "apellido",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "foto",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cargar Materia",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombreMateria",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "codigoMateria",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "cupo",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "aula",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/Clase 5/nexo.php",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"Clase 5",
+						"nexo.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inscribir Alumno",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar Alumno",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "jlopez@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "case",
+							"value": "modificarAlumno",
+							"type": "text"
+						},
+						{
+							"key": "foto",
+							"type": "file",
+							"src": "/C:/Users/Public/Pictures/Sample Pictures/Koala.jpg"
+						},
+						{
+							"key": "nombre",
+							"value": "Juan",
+							"type": "text"
+						},
+						{
+							"key": "apellido",
+							"value": "Lopez",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/Clase 5/nexo.php",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"Clase 5",
+						"nexo.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar todos los alumnos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}

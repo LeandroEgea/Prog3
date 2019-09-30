@@ -1,0 +1,1 @@
+[{"nombreAlumno":"Joan","apellidoAlumno":"Perez","emailAlumno":"jperez@gmail.com","nombreMateria":"Estadistic","codigoMateria":"A1"}]
