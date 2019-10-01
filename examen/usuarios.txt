@@ -1,1 +1,1 @@
-[{"legajo":"12345","email":"jperez@gmail.com","nombre":"Jose Perez4","clave":"pass4","fotoUno":".\/img\/fotos\/12345-1.jpg","fotoDos":".\/img\/fotos\/12345-2.jpg"}]
+[]

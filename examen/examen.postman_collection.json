@@ -1,0 +1,237 @@
+{
+	"info": {
+		"_postman_id": "a954cf41-caeb-4df7-a1f3-c1f427fc9776",
+		"name": "examen",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cargar Alumno",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "legajo",
+							"value": "1234566",
+							"type": "text"
+						},
+						{
+							"key": "nombre",
+							"value": "Jose Perez",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "jperez@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "pass",
+							"type": "text"
+						},
+						{
+							"key": "fotoUno",
+							"description": "//PONER FOTO",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "case",
+							"value": "cargarUsuario",
+							"type": "text"
+						},
+						{
+							"key": "fotoDos",
+							"description": "//PONER FOTO",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:80/examen/index.php",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"examen",
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "nombre",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "apellido",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "foto",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "localhost:80/examen/index.php?legajo=12345&clave=pass4&case=login",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"examen",
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "legajo",
+							"value": "12345"
+						},
+						{
+							"key": "clave",
+							"value": "pass4"
+						},
+						{
+							"key": "case",
+							"value": "login"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar Alumno",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "legajo",
+							"value": "12345",
+							"type": "text"
+						},
+						{
+							"key": "nombre",
+							"value": "Jose Perez4",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "jperez@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "pass4",
+							"type": "text"
+						},
+						{
+							"key": "fotoUno",
+							"description": "//PONER FOTO",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "case",
+							"value": "modificarUsuario",
+							"type": "text"
+						},
+						{
+							"key": "fotoDos",
+							"description": "//PONER FOTO",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:80/examen/index.php",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"examen",
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "nombre",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "apellido",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "foto",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
