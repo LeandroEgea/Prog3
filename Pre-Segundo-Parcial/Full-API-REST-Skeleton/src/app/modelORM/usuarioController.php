@@ -61,13 +61,13 @@ class UsuarioController
     {
         $tipo = $request->getAttribute('tipo');
         $body = $request->getParsedBody();
-        $usuarios = usuario::where('usuarios.legajo', '=', $body["legajo"])
+        $usuarios = usuario::where('usuarios.legajo', '=', $args["legajo"])
             ->join('tipos', 'usuarios.tipo_id', 'tipos.id')
             ->select('usuarios.id', 'usuarios.legajo', 'tipos.tipo')
             ->get()
             ->toArray();
 
-        if (count($usuarios) == 1 && ($usuarios[0]["legajo"] == $body["legajo"] || $tipo == "admin")) {
+        if (count($usuarios) == 1 && ($usuarios[0]["legajo"] == $args["legajo"] || $tipo == "admin")) {
             $usuario = $usuarios[0];
             unset($usuario["created_at"], $usuario["updated_at"], $usuario["clave"]);
             switch ($tipo) {

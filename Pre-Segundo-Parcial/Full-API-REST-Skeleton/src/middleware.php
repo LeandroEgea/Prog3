@@ -149,6 +149,28 @@ class Middleware
         return $newResponse;
     }
 
+    public function EsAlumno($request, $response, $next)
+    {
+        $token = $request->getHeader('token');
+        if ($token != null) {
+            try {
+                $token = $request->getHeader('token')[0];
+                $data = AutentificadorJWT::ObtenerData($token);
+                if ($data->tipo == "alumno") {
+                    $request = $request->withAttribute('id', $data->id);
+                    $newResponse = $next($request, $response);
+                } else {
+                    $newResponse = $response->withJson("No sos Alumno", 401);
+                }
+            } catch (Exception $e) {
+                $newResponse = $response->withJson("Fallo en la funcion", 500);
+            }
+        } else {
+            $newResponse = $response->withJson("No se ha recibido un token. Verificar e intentar nuevamente", 500);
+        }
+        return $newResponse;
+    }
+
     public function ObtenerTipo($request, $response, $next)
     {
         $token = $request->getHeader('token');
