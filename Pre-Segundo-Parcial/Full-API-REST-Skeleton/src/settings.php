@@ -30,7 +30,7 @@ return [
         'db' => [
            'driver' => 'mysql',
             'host' => 'localhost',
-            'database' => 'cdcol',
+            'database' => 'universidad',
             'username' => 'root',
             'password' => '',
             'charset'   => 'utf8',
