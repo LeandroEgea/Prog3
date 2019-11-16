@@ -19,7 +19,7 @@ class AutentificadorJWT
          */
         $payload = array(
             'iat' => $ahora,
-            'exp' => $ahora + (6000),
+            'exp' => $ahora + (1000000),
             'aud' => self::Aud(),
             'data' => $datos,
             'app' => "API REST CD UTN FRA",

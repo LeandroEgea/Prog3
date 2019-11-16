@@ -55,22 +55,47 @@ class UsuarioController
         return $response->withJson($usuario, 200);
     }
 
+    
     public function ModificarUno($request, $response, $args)
     {
         $tipo = $request->getAttribute('tipo');
         $body = $request->getParsedBody();
         $usuarios = usuario::where('usuarios.legajo', '=', $body["legajo"])
-            ->join('tipos', 'usuarios.tipo_id', 'tipos.id')
-            ->get()
-            ->toArray();
-
-        if (count($usuarios) == 1 && $usuarios[0]["legajo"] == $body["legajo"] && $usuarios[0]["tipo"] == $tipo) {
+        ->select('usuarios.id', 'usuarios.legajo')
+        ->get()
+        ->toArray();
+        
+        if (count($usuarios) == 1 && ($usuarios[0]["legajo"] == $body["legajo"] || $tipo == "admin")) {
             $usuario = $usuarios[0];
             unset($usuario["created_at"], $usuario["updated_at"], $usuario["clave"]);
-           return $response->withJson($usuario, 200);
+            switch ($tipo) {
+                case "alumno":
+                    return $this->ModificarAlumno($usuario, $body, $response);
+                    break;
+                // case "profesor":
+                //     ModificarProfesor($usuario);
+                //     break;
+                // case "admin":
+                //     ModificarAlumno($usuario);
+                //     ModificarProfesor($usuario);
+                //     break;
+                default:
+                return $response->withJson("Tipo Usuario Invalido", 500);
+            }
+            return $response->withJson($usuario, 200);
         } else {
             return $response->withJson("Los campos seleccionados no corresponden al usuario", 500);
         }
     }
-
+    
+    public function ModificarAlumno($alumno, $body, $response)
+    {
+        $alumno = Usuario::find($alumno["id"]);
+        if($body["email"] != null) {
+            $alumno->email = $body["email"];
+        }
+        $alumno->save();
+        unset($alumno["clave"], $alumno["created_at"], $alumno["updated_at"]);
+        return $response->withJson($alumno, 200);
+    }
 }
