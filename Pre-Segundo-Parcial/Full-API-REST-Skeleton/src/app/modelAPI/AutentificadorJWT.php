@@ -44,10 +44,6 @@ class AutentificadorJWT
             throw $e;
         }
 
-        // si no da error,  verifico los datos de AUD que uso para saber de que lugar viene
-        if ($decodificado->aud !== self::Aud()) {
-            throw new Exception("No es el usuario valido");
-        }
         return true;
     }
 

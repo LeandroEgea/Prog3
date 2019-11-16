@@ -3,8 +3,10 @@ namespace App\Models\ORM;
 
 use App\Models\AutentificadorJWT;
 use App\Models\ORM\Usuario;
+use App\Models\ORM\UsuarioMateria;
 
 include_once __DIR__ . '/usuario.php';
+include_once __DIR__ . '/usuarioMateria.php';
 include_once __DIR__ . '../../modelAPI/AutentificadorJWT.php';
 
 class UsuarioController
@@ -55,16 +57,16 @@ class UsuarioController
         return $response->withJson($usuario, 200);
     }
 
-    
     public function ModificarUno($request, $response, $args)
     {
         $tipo = $request->getAttribute('tipo');
         $body = $request->getParsedBody();
         $usuarios = usuario::where('usuarios.legajo', '=', $body["legajo"])
-        ->select('usuarios.id', 'usuarios.legajo')
-        ->get()
-        ->toArray();
-        
+            ->join('tipos', 'usuarios.tipo_id', 'tipos.id')
+            ->select('usuarios.id', 'usuarios.legajo', 'tipos.tipo')
+            ->get()
+            ->toArray();
+
         if (count($usuarios) == 1 && ($usuarios[0]["legajo"] == $body["legajo"] || $tipo == "admin")) {
             $usuario = $usuarios[0];
             unset($usuario["created_at"], $usuario["updated_at"], $usuario["clave"]);
@@ -72,30 +74,64 @@ class UsuarioController
                 case "alumno":
                     return $this->ModificarAlumno($usuario, $body, $response);
                     break;
-                // case "profesor":
-                //     ModificarProfesor($usuario);
-                //     break;
-                // case "admin":
-                //     ModificarAlumno($usuario);
-                //     ModificarProfesor($usuario);
-                //     break;
+                case "profesor":
+                    return $this->ModificarProfesor($usuario, $body, $response);
+                    break;
+                case "admin":
+                    switch ($usuario["tipo"]) {
+                        case "alumno":
+                            return $this->ModificarAlumno($usuario, $body, $response);
+                            break;
+                        case "profesor":
+                        case "admin":
+                            return $this->ModificarProfesor($usuario, $body, $response);
+                            break;
+                    }
                 default:
-                return $response->withJson("Tipo Usuario Invalido", 500);
+                    return $response->withJson("Tipo Usuario Invalido", 500);
             }
             return $response->withJson($usuario, 200);
         } else {
             return $response->withJson("Los campos seleccionados no corresponden al usuario", 500);
         }
     }
-    
+
     public function ModificarAlumno($alumno, $body, $response)
     {
         $alumno = Usuario::find($alumno["id"]);
-        if($body["email"] != null) {
+        if (array_key_exists("email", $body)) {
             $alumno->email = $body["email"];
         }
         $alumno->save();
         unset($alumno["clave"], $alumno["created_at"], $alumno["updated_at"]);
         return $response->withJson($alumno, 200);
+    }
+
+    public function ModificarProfesor($profesor, $body, $response)
+    {
+        $profesor = Usuario::find($profesor["id"]);
+        if (array_key_exists("email", $body)) {
+            $profesor->email = $body["email"];
+        }
+        if (array_key_exists("materias", $body)) {
+            $ids = explode(",", $body["materias"]);
+            foreach ($ids as $id) {
+                if (Materia::find($id) != null) {
+                    $where = [['usuarios_materias.materia_id', '=', $id], ['usuarios_materias.usuario_id', '=', $profesor->id]];
+                    if (UsuarioMateria::where($where)
+                        ->select('usuarios_materias.usuario_id')
+                        ->get()
+                        ->toArray() == null) {
+                        $usuarioMateria = new UsuarioMateria;
+                        $usuarioMateria->materia_id = $id;
+                        $usuarioMateria->usuario_id = $profesor->id;
+                        $usuarioMateria->save();
+                    }
+                }
+            }
+        }
+        $profesor->save();
+        unset($profesor["clave"], $profesor["created_at"], $profesor["updated_at"]);
+        return $response->withJson($profesor, 200);
     }
 }
