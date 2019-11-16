@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2019 a las 15:30:51
+-- Tiempo de generación: 16-11-2019 a las 15:58:47
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.8
 
@@ -30,17 +30,19 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tipos` (
   `id` int(11) NOT NULL,
-  `tipo` varchar(64) COLLATE utf8_spanish2_ci NOT NULL
+  `tipo` varchar(64) COLLATE utf8_spanish2_ci NOT NULL,
+  `crate_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `update_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `tipos`
 --
 
-INSERT INTO `tipos` (`id`, `tipo`) VALUES
-(1, 'alumno'),
-(2, 'profesor'),
-(3, 'admin');
+INSERT INTO `tipos` (`id`, `tipo`, `crate_at`, `update_at`) VALUES
+(1, 'alumno', '2019-11-16 14:58:38', '2019-11-16 14:58:38'),
+(2, 'profesor', '2019-11-16 14:58:38', '2019-11-16 14:58:38'),
+(3, 'admin', '2019-11-16 14:58:38', '2019-11-16 14:58:38');
 
 -- --------------------------------------------------------
 
@@ -53,7 +55,9 @@ CREATE TABLE `usuarios` (
   `legajo` int(11) NOT NULL,
   `email` varchar(128) COLLATE utf8_spanish2_ci NOT NULL,
   `clave` varchar(128) COLLATE utf8_spanish2_ci NOT NULL,
-  `tipo_id` int(11) NOT NULL
+  `tipo_id` int(11) NOT NULL,
+  `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `update_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
