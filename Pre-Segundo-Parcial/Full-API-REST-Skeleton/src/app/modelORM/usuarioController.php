@@ -3,13 +3,11 @@ namespace App\Models\ORM;
 
 use App\Models\AutentificadorJWT;
 use App\Models\ORM\Usuario;
-use App\Models\IApiControler;
 
-include_once __DIR__ . '../../modelAPI/AutentificadorJWT.php';
 include_once __DIR__ . '/usuario.php';
-include_once __DIR__ . '../../modelAPI/IApiControler.php';
+include_once __DIR__ . '../../modelAPI/AutentificadorJWT.php';
 
-class UsuarioController implements IApiControler
+class UsuarioController
 {
     public function Login($request, $response, $args)
     {
@@ -36,10 +34,6 @@ class UsuarioController implements IApiControler
             ->join('tipos', 'usuarios.tipo_id', 'tipos.id')
             ->select('usuarios.legajo', 'usuarios.email', 'tipos.tipo')
             ->get();
-        // $usuarios = DB::table('usuarios')
-        //     ->join('tipos', 'usuarios.tipo_id', '=', 'tipos.id')
-        //     ->select('usuarios.legajo', 'usuarios.email', 'tipos.tipos')
-        //     ->get();
 
         $newResponse = $response->withJson($usuarios, 200);
         return $newResponse;
@@ -60,4 +54,23 @@ class UsuarioController implements IApiControler
 
         return $response->withJson($usuario, 200);
     }
+
+    public function ModificarUno($request, $response, $args)
+    {
+        $tipo = $request->getAttribute('tipo');
+        $body = $request->getParsedBody();
+        $usuarios = usuario::where('usuarios.legajo', '=', $body["legajo"])
+            ->join('tipos', 'usuarios.tipo_id', 'tipos.id')
+            ->get()
+            ->toArray();
+
+        if (count($usuarios) == 1 && $usuarios[0]["legajo"] == $body["legajo"] && $usuarios[0]["tipo"] == $tipo) {
+            $usuario = $usuarios[0];
+            unset($usuario["created_at"], $usuario["updated_at"], $usuario["clave"]);
+           return $response->withJson($usuario, 200);
+        } else {
+            return $response->withJson("Los campos seleccionados no corresponden al usuario", 500);
+        }
+    }
+
 }
