@@ -14,14 +14,15 @@ class UsuarioController
     public function Login($request, $response, $args)
     {
         $body = $request->getParsedBody();
-        $usuarios = usuario::where('usuarios.email', '=', $body["email"])
+        $usuarios = Usuario::where('usuarios.email', '=', $body["email"])
             ->join('tipos', 'usuarios.tipo_id', 'tipos.id')
+            ->select('usuarios.id', 'usuarios.legajo', 'usuarios.email', 'usuarios.tipo_id', 'tipos.tipo', 'usuarios.clave')
             ->get()
             ->toArray();
 
         if (count($usuarios) == 1 && $usuarios[0]["clave"] == $body["clave"]) {
             $usuario = $usuarios[0];
-            unset($usuario["created_at"], $usuario["updated_at"], $usuario["clave"]);
+            unset($usuario["clave"]);
             $token = AutentificadorJWT::CrearToken($usuario);
             $newResponse = $response->withJson($token, 200);
         } else {
@@ -73,24 +74,19 @@ class UsuarioController
             switch ($tipo) {
                 case "alumno":
                     return $this->ModificarAlumno($usuario, $body, $response);
-                    break;
                 case "profesor":
                     return $this->ModificarProfesor($usuario, $body, $response);
-                    break;
                 case "admin":
                     switch ($usuario["tipo"]) {
                         case "alumno":
                             return $this->ModificarAlumno($usuario, $body, $response);
-                            break;
                         case "profesor":
                         case "admin":
                             return $this->ModificarProfesor($usuario, $body, $response);
-                            break;
                     }
                 default:
                     return $response->withJson("Tipo Usuario Invalido", 500);
             }
-            return $response->withJson($usuario, 200);
         } else {
             return $response->withJson("Los campos seleccionados no corresponden al usuario", 500);
         }

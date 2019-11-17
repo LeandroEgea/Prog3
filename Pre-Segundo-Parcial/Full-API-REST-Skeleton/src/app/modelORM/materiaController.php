@@ -38,7 +38,7 @@ class MateriaController
             $usuarioMateria->materia_id = $args["idmateria"];
             $usuarioMateria->usuario_id = $request->getAttribute('id');
             $usuarioMateria->save();
-            unset($usuarioMateria["created_at"], $usuarioMateria["updated_at"]);
+            unset($usuarioMateria["created_at"], $usuarioMateria["updated_at"], $usuarioMateria["id"]);
             $materia->cupos--;
             $materia->save();
             return $response->withJson($usuarioMateria, 200);
@@ -46,5 +46,35 @@ class MateriaController
         else{
             return $response->withJson("No se pudo inscribir", 500);
         }
+    }
+
+    public function TraerTodos($request, $response, $args)
+    {
+        $tipo = $request->getAttribute('tipo');
+        $id = $request->getAttribute('id');
+        switch ($tipo) {
+            case "alumno":
+            case "profesor":
+                return $this->ObtenerMateriasDelUsuario($id, $response);
+            case "admin":
+                return $this->Obtener($response);
+            default:
+                return $response->withJson("Tipo Usuario Invalido", 500);
+        }
+    }
+
+    public function ObtenerMateriasDelUsuario($id, $response)
+    {
+        $materias = UsuarioMateria::where('usuarios_materias.usuario_id', '=', $id)
+            ->join('materias', 'usuarios_materias.materia_id', 'materias.id')
+            ->select('usuarios_materias.materia_id','materias.nombre','materias.cuatrimestre','materias.cupos')
+            ->get();
+        return $response->withJson($materias, 200);
+    }
+
+    public function Obtener($response)
+    {
+        $materias = Materia::all(['id', 'nombre', 'cuatrimestre', 'cupos']);
+        return $response->withJson($materias, 200);
     }
 }

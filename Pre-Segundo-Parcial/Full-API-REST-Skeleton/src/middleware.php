@@ -116,8 +116,7 @@ class Middleware
                 $token = $request->getHeader('token')[0];
                 if (AutentificadorJWT::VerificarToken($token)) {
                     $usuario = AutentificadorJWT::ObtenerData($token);
-                    $response = $next($request, $response);
-                    return $response;
+                    $newResponse = $next($request, $response);
                 }
             } catch (Exception $e) {
                 $newResponse = $response->withJson("Fallo en la funcion", 500);
@@ -179,6 +178,25 @@ class Middleware
                 $token = $request->getHeader('token')[0];
                 $data = AutentificadorJWT::ObtenerData($token);
                 $request = $request->withAttribute('tipo', $data->tipo);
+                $newResponse = $next($request, $response);
+            } catch (Exception $e) {
+                $newResponse = $response->withJson("No se ha recibido un token. Verificar e intentar nuevamente", 500);
+            }
+        } else {
+            $newResponse = $response->withJson("No se ha recibido un token. Verificar e intentar nuevamente", 500);
+        }
+        return $newResponse;
+    }
+
+    public function ObtenerTipoYID($request, $response, $next)
+    {
+        $token = $request->getHeader('token');
+        if ($token != null) {
+            try {
+                $token = $request->getHeader('token')[0];
+                $data = AutentificadorJWT::ObtenerData($token);
+                $request = $request->withAttribute('tipo', $data->tipo);
+                $request = $request->withAttribute('id', $data->id);
                 $newResponse = $next($request, $response);
             } catch (Exception $e) {
                 $newResponse = $response->withJson("No se ha recibido un token. Verificar e intentar nuevamente", 500);
