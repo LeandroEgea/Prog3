@@ -82,7 +82,7 @@ class MateriaController
         $tipo = $request->getAttribute('tipo');
         $idUsuario = $request->getAttribute('id');
         $idMateria = $args['idmateria'];
-        if (Materia::find($idMateria) == null){
+        if (Materia::find($idMateria) == null) {
             return $response->withJson("Materia Not found", 404);
         }
         if ($tipo == "profesor") {
@@ -96,7 +96,14 @@ class MateriaController
                 return $response->withJson("No sos profesor de esta materia", 401);
             }
         }
-        //TODO: logica de traer listado
-        return $response->withJson("TODO: traer lista", 200);
+        $where = [['usuarios_materias.materia_id', '=', $idMateria],
+            ['tipos.tipo', '=', "alumno"]];
+        $alumnos = UsuarioMateria::where($where)
+            ->join('usuarios', 'usuarios.id', 'usuarios_materias.usuario_id')
+            ->join('tipos', 'tipos.id', 'usuarios.tipo_id')
+            ->select('usuarios.id', 'usuarios.legajo', 'usuarios.email')
+            ->get()
+            ->toArray();
+        return $response->withJson($alumnos, 200);
     }
 }

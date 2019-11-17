@@ -398,3 +398,17 @@
 [2019-11-17 03:14:14] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2Fsp%2Fpublic, RUTA=materias%2F5, autoridad=localhost [] {"uid":"582523d"}
 [2019-11-17 03:14:42] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2Fsp%2Fpublic, RUTA=materias%2F5, autoridad=localhost [] {"uid":"88319ce"}
 [2019-11-17 03:14:46] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2Fsp%2Fpublic, RUTA=materias%2F4, autoridad=localhost [] {"uid":"83761a9"}
+[2019-11-17 03:19:42] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2Fsp%2Fpublic, RUTA=materias%2F4, autoridad=localhost [] {"uid":"a8cc15d"}
+[2019-11-17 03:31:22] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2Fsp%2Fpublic, RUTA=materias%2F4, autoridad=localhost [] {"uid":"f652a7f"}
+[2019-11-17 03:31:38] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2Fsp%2Fpublic, RUTA=materias%2F4, autoridad=localhost [] {"uid":"4c8e5e7"}
+[2019-11-17 03:31:54] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2Fsp%2Fpublic, RUTA=materias%2F2, autoridad=localhost [] {"uid":"eff6134"}
+[2019-11-17 03:33:25] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2Fsp%2Fpublic, RUTA=materias%2F2, autoridad=localhost [] {"uid":"559c3a0"}
+[2019-11-17 03:34:11] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2Fsp%2Fpublic, RUTA=materias%2F4, autoridad=localhost [] {"uid":"6958ee4"}
+[2019-11-17 03:34:22] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2Fsp%2Fpublic, RUTA=materias%2F3, autoridad=localhost [] {"uid":"4e8b4ca"}
+[2019-11-17 03:34:27] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2Fsp%2Fpublic, RUTA=materias%2F5, autoridad=localhost [] {"uid":"6a36207"}
+[2019-11-17 03:34:32] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2Fsp%2Fpublic, RUTA=materias%2F2, autoridad=localhost [] {"uid":"4a2b40a"}
+[2019-11-17 03:35:48] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2Fsp%2Fpublic, RUTA=materias%2F2, autoridad=localhost [] {"uid":"2b46f99"}
+[2019-11-17 03:35:53] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2Fsp%2Fpublic, RUTA=materias%2F4, autoridad=localhost [] {"uid":"6c59201"}
+[2019-11-17 03:35:57] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2Fsp%2Fpublic, RUTA=materias%2F1, autoridad=localhost [] {"uid":"e313c35"}
+[2019-11-17 03:36:02] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2Fsp%2Fpublic, RUTA=materias%2F3, autoridad=localhost [] {"uid":"2299036"}
+[2019-11-17 03:36:08] UTN FRA LOGGER.INFO: metodo=GET, URI=http%3A%2F%2Flocalhost%2Fsp%2Fpublic, RUTA=materias%2F5, autoridad=localhost [] {"uid":"ee1c4c5"}
