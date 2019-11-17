@@ -30,9 +30,9 @@ class MateriaController
         if (
             $materia != null &&
             UsuarioMateria::where($where)
-                ->select('usuarios_materias.usuario_id')
-                ->get()
-                ->toArray() == null
+            ->select('usuarios_materias.usuario_id')
+            ->get()
+            ->toArray() == null
         ) {
             $usuarioMateria = new UsuarioMateria;
             $usuarioMateria->materia_id = $args["idmateria"];
@@ -42,8 +42,7 @@ class MateriaController
             $materia->cupos--;
             $materia->save();
             return $response->withJson($usuarioMateria, 200);
-        }
-        else{
+        } else {
             return $response->withJson("No se pudo inscribir", 500);
         }
     }
@@ -67,7 +66,7 @@ class MateriaController
     {
         $materias = UsuarioMateria::where('usuarios_materias.usuario_id', '=', $id)
             ->join('materias', 'usuarios_materias.materia_id', 'materias.id')
-            ->select('usuarios_materias.materia_id','materias.nombre','materias.cuatrimestre','materias.cupos')
+            ->select('usuarios_materias.materia_id', 'materias.nombre', 'materias.cuatrimestre', 'materias.cupos')
             ->get();
         return $response->withJson($materias, 200);
     }
@@ -76,5 +75,28 @@ class MateriaController
     {
         $materias = Materia::all(['id', 'nombre', 'cuatrimestre', 'cupos']);
         return $response->withJson($materias, 200);
+    }
+
+    public function ListaAlumnos($request, $response, $args)
+    {
+        $tipo = $request->getAttribute('tipo');
+        $idUsuario = $request->getAttribute('id');
+        $idMateria = $args['idmateria'];
+        if (Materia::find($idMateria) == null){
+            return $response->withJson("Materia Not found", 404);
+        }
+        if ($tipo == "profesor") {
+            $where = [['usuarios_materias.materia_id', '=', $idMateria],
+                ['usuarios_materias.usuario_id', '=', $idUsuario]];
+            if (
+                UsuarioMateria::where($where)
+                ->select('usuarios_materias.usuario_id')
+                ->get()
+                ->toArray() == null) {
+                return $response->withJson("No sos profesor de esta materia", 401);
+            }
+        }
+        //TODO: logica de traer listado
+        return $response->withJson("TODO: traer lista", 200);
     }
 }

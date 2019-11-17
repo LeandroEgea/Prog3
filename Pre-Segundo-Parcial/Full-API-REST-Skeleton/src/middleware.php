@@ -119,7 +119,7 @@ class Middleware
                     $newResponse = $next($request, $response);
                 }
             } catch (Exception $e) {
-                $newResponse = $response->withJson("Fallo en la funcion", 500);
+                $newResponse = $response->withJson("Fallo en la funcion (estoy en ValidarToken)", 500);
             }
         } else {
             $newResponse = $response->withJson("No se ha recibido un token. Verificar e intentar nuevamente", 500);
@@ -200,6 +200,27 @@ class Middleware
                 $newResponse = $next($request, $response);
             } catch (Exception $e) {
                 $newResponse = $response->withJson("No se ha recibido un token. Verificar e intentar nuevamente", 500);
+            }
+        } else {
+            $newResponse = $response->withJson("No se ha recibido un token. Verificar e intentar nuevamente", 500);
+        }
+        return $newResponse;
+    }
+
+    public function FiltroListaAlumnos($request, $response, $next)
+    {
+        $token = $request->getHeader('token');
+        if ($token != null) {
+            try {
+                $token = $request->getHeader('token')[0];
+                $data = AutentificadorJWT::ObtenerData($token);
+                if ($data->tipo == "admin" || $data->tipo == "profesor") {
+                    $newResponse = $next($request, $response);
+                } else {
+                    $newResponse = $response->withJson("Tenes que ser admin o profesor", 401);
+                }
+            } catch (Exception $e) {
+                $newResponse = $response->withJson("Fallo en la funcion (estoy en FiltroListaAlumnos)", 500);
             }
         } else {
             $newResponse = $response->withJson("No se ha recibido un token. Verificar e intentar nuevamente", 500);

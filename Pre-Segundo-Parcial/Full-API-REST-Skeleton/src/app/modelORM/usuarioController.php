@@ -103,7 +103,7 @@ class UsuarioController
         return $response->withJson($alumno, 200);
     }
 
-    public function ModificarProfesor($profesor, $body, $response)
+    public function ListaAlumnos($profesor, $body, $response)
     {
         $profesor = Usuario::find($profesor["id"]);
         if (array_key_exists("email", $body)) {
