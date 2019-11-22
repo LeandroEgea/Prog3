@@ -1,0 +1,2 @@
+[{"nombre":"Gabriel","apellido":"Saliba","email":"gsaliba@gmail.com","foto":".\/imagenes\/gsaliba@gmail.com.jpg"},
+{"nombre":"Leandro","apellido":"Egea","email":"lean@gmail.com","foto":".\/imagenes\/gsaliba@gmail.com.jpg"}]
