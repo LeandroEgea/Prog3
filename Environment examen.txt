@@ -1,0 +1,7 @@
+Instalar postman(llevar el pen) -> logearme
+Clonar repo mio
+Abrir xampp -> start Apache -> start MySQL -> Admin MySQL
+Crear base de datos utf8_spanish2-ci
+Clonarse el fork del repo de octavio en htdocs
+
+NOTA: ir haciendose copias en el D por las dudas
