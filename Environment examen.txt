@@ -6,3 +6,20 @@ Clonarse el fork del repo de octavio en htdocs
 https://github.com/LeandroEgea/Full-API-REST-Skeleton.git
 
 NOTA: ir haciendose copias en el D por las dudas
+
+settings.php -> nombre DB
+
+php intellisense
+phpfmt
+ctrl+, -> User -> Extensions -> PHP
+"[php]": {
+    "editor.formatOnSave": true
+}
+
+created_at
+updated_at
+
+cambiar tiempo a token
+https://jwt.io/
+
+copiarse el AutentificadorJWT porq el otro pincha

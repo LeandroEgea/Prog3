@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 return [
     'settings' => [
         'displayErrorDetails' => true, // set to false in production
@@ -19,7 +16,7 @@ return [
             'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
             'level' => \Monolog\Logger::DEBUG,
         ],
-         // Monolog settings
+        // Monolog settings
         'IPlogger' => [
             'name' => 'UTN FRA LOGGER',
             'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/ip.log',
@@ -28,15 +25,14 @@ return [
 
         // eloquent settings
         'db' => [
-           'driver' => 'mysql',
+            'driver' => 'mysql',
             'host' => 'localhost',
             'database' => 'universidad',
             'username' => 'root',
             'password' => '',
-            'charset'   => 'utf8',
+            'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
-            'prefix'    => '',
+            'prefix' => '',
         ],
-
     ],
 ];

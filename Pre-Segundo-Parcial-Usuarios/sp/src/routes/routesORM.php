@@ -1,33 +1,29 @@
 <?php
 
+use App\Models\ORM\UserController;
 use Slim\App;
-use Slim\Http\Request;
-use Slim\Http\Response;
-use App\Models\ORM\cd;
-use App\Models\ORM\cdApi;
 
-
-include_once __DIR__ . '/../../src/app/modelORM/cd.php';
-include_once __DIR__ . '/../../src/app/modelORM/cdControler.php';
+include_once __DIR__ . '/../../src/app/modelORM/user.php';
+include_once __DIR__ . '/../../src/app/modelORM/userController.php';
 
 return function (App $app) {
     $container = $app->getContainer();
 
-     $app->group('/cdORM', function () {   
-         
-        $this->get('/', function ($request, $response, $args) {
-          //return cd::all()->toJson();
-          $todosLosCds=cd::all();
-          $newResponse = $response->withJson($todosLosCds, 200);  
-          return $newResponse;
-        });
+    $app->group('/users', function () {
+        $this->post('[/]', UserController::class . ':cargarUno');
     });
 
+    $app->group('/login', function () {
+        $this->post('[/]', UserController::class . ':login');
+    });
 
-     $app->group('/cdORM2', function () {   
+    $app->group('/ingreso', function () {
+        $this->post('[/]', UserController::class . ':ficharIngreso')->add(Middleware::class . ':validarToken');
+        $this->get('[/]', UserController::class . ':obtenerIngresos')->add(Middleware::class . ':validarToken');
+    });
 
-        $this->get('/',cdApi::class . ':traerTodos');
-   
+    $app->group('/egreso', function () {
+        $this->post('[/]', UserController::class . ':ficharEgreso')->add(Middleware::class . ':validarToken');
     });
 
 };

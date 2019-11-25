@@ -1,13 +1,10 @@
 <?php
 
-use Slim\App;
 use Illuminate\Database\Capsule\Manager as Capsule;
+use Slim\App;
 
 return function (App $app) {
     $container = $app->getContainer();
-       
-
-      
 
     // view renderer
     $container['renderer'] = function ($c) {
@@ -23,7 +20,7 @@ return function (App $app) {
         $logger->pushHandler(new \Monolog\Handler\StreamHandler($settings['path'], $settings['level']));
         return $logger;
     };
- // monolog
+    // monolog
     $container['IPlogger'] = function ($c) {
         $settings = $c->get('settings')['IPlogger'];
         $logger = new \Monolog\Logger($settings['name']);
@@ -35,13 +32,12 @@ return function (App $app) {
         $capsule = new \Illuminate\Database\Capsule\Manager;
         $capsule->addConnection($container['settings']['db']);
 
-       // $capsule->setAsGlobal();
+        // $capsule->setAsGlobal();
         $capsule->bootEloquent();
 
         return $capsule;
     };
 
-   $container['db']->setAsGlobal();
-
+    $container['db']->setAsGlobal();
 
 };
